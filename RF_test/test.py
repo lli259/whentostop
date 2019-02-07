@@ -21,14 +21,14 @@ from sklearn.metrics import make_scorer
 #this is a simple [(1,1),(2,1),(3,1)..(10,1)] data
 #y[3,5,7,9..]
 #100% fit
-'''
+
 trainSet_X=np.array(range(1,11))
-trainSet_y=trainSet_X*2+1
+trainSet_y=trainSet_X**2+trainSet_X*2+1
 trainSet_X=np.array([(i,1) for i in range(1,11)])
 trainSet_X=trainSet_X.reshape(-1,2)
 trainSet_y=trainSet_y.reshape(-1,1)
 
-
+'''
 #this is (100*6) random data
 #y 100*1 random
 #not 100% fit when f(i1)===f(i2) due to random initiation
@@ -40,13 +40,13 @@ trainSet_y=trainSet_y.reshape(-1,1)
 #this portfolio data
 #not 100% thought
 #2 instances when f(i1)===f(i2) 
-'''
-trainSet=pd.read_csv("trainSet.csv")
+
+trainSet=pd.read_csv("trainSet1.csv")
 trainSet_y=trainSet["runtime_ham10"]
 trainSet_y=np.array(trainSet_y)
 trainSet_y.reshape(-1,1)
 trainSet_X=trainSet.iloc[:,:-8]
-
+'''
 
 
 number_of_bin=10
@@ -72,7 +72,7 @@ print("1st bin validation for each depth")
 print(dt_scores)
 
 
-max_depth = range(2, 20, 1)
+max_depth = range(1, 20, 1)
 dt_scores = [] #avg cross validation
 dt_scores_1stbin=[] # 1st bin validation
 dt_scores_full=[] #self train error
@@ -145,15 +145,15 @@ for each in resut_cmp:
 
 
 #print "DTscoring:",dt_scores
-plt.subplot(3,1,1)
+plt.subplot(2,1,1)
 plt.plot(max_depth, dt_scores,label="DT")
 plt.xlabel('Value of depth: Algorithm dt_scores_bins')
 plt.ylabel('Cross-Validated MSE')
-plt.subplot(3,1,2)
-plt.plot(max_depth, dt_scores_full,label="DT")
-plt.xlabel('Value of depth: Algorithm dt_scores_full')
-plt.ylabel('Cross-Validated MSE')
-plt.subplot(3,1,3)
+#plt.subplot(3,1,2)
+#plt.plot(max_depth, dt_scores_full,label="DT")
+#plt.xlabel('Value of depth: Algorithm dt_scores_full')
+#plt.ylabel('Cross-Validated MSE')
+plt.subplot(2,1,2)
 plt.plot(max_depth, dt_scores_1stbin,label="DT")
 plt.xlabel('Value of depth: Algorithm dt_scores_1bin')
 plt.ylabel('Cross-Validated MSE')

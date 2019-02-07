@@ -55,14 +55,14 @@ def cross_val_score2(dtModel,trainSet_X, trainSet_y, bins):
 		
 	return np.array(vret)
 
-
-
+'''
+#Quadratic equation
 trainSet_X=np.array(range(1,11))
-trainSet_y=trainSet_X*2+1
+trainSet_y=trainSet_X**2+trainSet_X*2+1
 trainSet_X=np.array([(i,1) for i in range(1,11)])
 trainSet_X=trainSet_X.reshape(-1,2)
 trainSet_y=trainSet_y.reshape(-1,1)
-'''
+
 
 #this is (100*6) random data
 #y 100*1 random
@@ -71,6 +71,7 @@ np.random.seed(2)
 trainSet_X=np.random.rand(100,6)
 trainSet_y=np.random.rand(100,1)
 trainSet_y=trainSet_y.reshape(-1,1)
+'''
 
 #this portfolio data
 #not 100% thought
@@ -83,16 +84,15 @@ trainSet_y.reshape(-1,1)
 trainSet_X=trainSet.iloc[:,:-8]
 
 
-'''
 number_of_bin=10
-max_depth = range(2, 5, 1)
+max_depth = range(1, 2, 1)
 dt_scores = []
-print(str(number_of_bin) +" bins validation for each depth")
+#print(str(number_of_bin) +" bins validation for each depth")
 for k in max_depth:
 	#show n fold cross_val_score at current depth
 	regr_k =tree.DecisionTreeRegressor(max_depth=k,random_state=1)
 	loss = cross_val_score2(regr_k, trainSet_X, trainSet_y, number_of_bin)
-	print(k,":",loss)
+	#print(k,":",loss)
 	#dt_scores.append(loss.mean())
 
 	#only first bins val_score
@@ -101,18 +101,18 @@ for k in max_depth:
 	dtModel= dtModel.fit(trainSet_X[:numof1st], trainSet_y[:numof1st])
 	y_=dtModel.predict(trainSet_X[numof1st:])
 	dt_scores.append(mean_squared_error(trainSet_y[numof1st:], y_))
-print("1st bin validation for each depth")
+#print("1st bin validation for each depth")
 #to find how they use first bins
 #my way: ceil(all/float(bins))*(bins-1), something same
-print(dt_scores)
+#print(dt_scores)
 
 
-max_depth = range(1, 30, 1)
+max_depth = range(2, 30, 1)
 dt_scores = [] #avg cross validation
 dt_scores_1stbin=[] # 1st bin validation
 dt_scores_full=[] #self train error
 for k in max_depth:
-	print(k)
+	#print(k)
 	regr_k =tree.DecisionTreeRegressor(max_depth=k,random_state=1)
 	loss = cross_val_score2(regr_k, trainSet_X, trainSet_y, number_of_bin)
 	#print(loss)
@@ -137,19 +137,19 @@ for k in max_depth:
 			pass
 			#print(each)
 	dt_scores_full.append(mean_squared_error(trainSet_y, y_))
-print(str(number_of_bin) +"bins validation average for each depth")
-print(dt_scores)
-print("self training error for each depth")
-print(dt_scores_full)
-print("1st bin validation")
-print(dt_scores_1stbin)
+#print(str(number_of_bin) +"bins validation average for each depth")
+#print(dt_scores)
+#print("self training error for each depth")
+#print(dt_scores_full)
+#print("1st bin validation")
+#print(dt_scores_1stbin)
 
 
-print("bestDepthDT:")
+#print("bestDepthDT:")
 bestscoreDT0,bestDepthDT0=sorted(list(zip(dt_scores,max_depth)))[0]
 print(bestDepthDT0)
 bestscoreDT,bestDepthDT=sorted(list(zip(dt_scores_full,max_depth)))[0]
-print(bestDepthDT)
+#print(bestDepthDT)
 bestscoreDT,bestDepthDT=sorted(list(zip(dt_scores_1stbin,max_depth)))[0]
 print(bestDepthDT)
 
@@ -164,7 +164,7 @@ y_=dtModel.predict(trainSet_X[numof1st:])
 resut_cmp=zip(y_,trainSet_y[numof1st:])
 for each in resut_cmp:
 	pass
-	print(each)
+	#print(each)
 
 
 

@@ -21,14 +21,14 @@ from sklearn.metrics import make_scorer
 #this is a simple [(1,1),(2,1),(3,1)..(10,1)] data
 #y[3,5,7,9..]
 #100% fit
-'''
+
 trainSet_X=np.array(range(1,11))
-trainSet_y=trainSet_X*2+1
+trainSet_y=trainSet_X**2+trainSet_X*2+1
 trainSet_X=np.array([(i,1) for i in range(1,11)])
 trainSet_X=trainSet_X.reshape(-1,2)
 trainSet_y=trainSet_y.reshape(-1,1)
 
-
+'''
 #this is (100*6) random data
 #y 100*1 random
 #not 100% fit when f(i1)===f(i2) due to random initiation
@@ -40,13 +40,13 @@ trainSet_y=trainSet_y.reshape(-1,1)
 #this portfolio data
 #not 100% thought
 #2 instances when f(i1)===f(i2) 
-'''
+
 trainSet=pd.read_csv("trainSet.csv")
 trainSet_y=trainSet["runtime_ham10"]
 trainSet_y=np.array(trainSet_y)
 trainSet_y.reshape(-1,1)
 trainSet_X=trainSet.iloc[:,:-8]
-
+'''
 
 
 number_of_bin=10
